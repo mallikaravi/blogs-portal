@@ -1,0 +1,44 @@
+{% extends "blog_app/base.html" %}
+{% block content %}
+
+<div class="login-form login">
+    <header class="login--header text-center">
+        <span class="icon icon-medium fa fa-lock"></span>
+        <h3>login</h3>
+        <span class="arrow-down login--header__arrow"></span>
+    </header>
+    <form action="{% url 'blog_app:user_login' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+        	<div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <span class="fa fa-user"></span>
+                    </span>                    
+                </div>
+                <input type="text" class="form-control" placeholder="Username" required="required" name="username">
+            </div>
+        </div>
+		<div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fa fa-lock"></i>
+                    </span>                    
+                </div>
+                <input type="password" class="form-control" placeholder="Password" required="required" name="password">
+            </div>
+        </div>        
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Log in</button>
+        </div>
+        <div class="bottom-action clearfix">
+            <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
+            <a href="#" class="float-right">Forgot Password?</a>
+        </div>        
+    </form>
+    <p class="text-center medium" >Don't have an account! <a href="{% url 'blog_app:registration' %}">Sign up here</a>.</p>
+</div>
+
+
+{% endblock %} 

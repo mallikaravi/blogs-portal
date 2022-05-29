@@ -1,0 +1,44 @@
+{% extends "blog_app/base.html" %}
+
+
+
+{% block content %}
+<a class='btn btn-primary btn-rounded btn-icon pull-right btn-lg' href="{% url 'blog_app:addpost'%}"> <i class="fa fa-pencil-square-o  "></i> </a>    
+<div class="container mt-5 mb-3">
+  <div class="row">
+    {% for post in post_list %}
+    <div class="card shadow " style="width: 20rem; height: 30rem;" >
+          <img src="{{ post.blog_pic.url }}" class="card-img-top" alt="..." height="250px">
+
+          <div class="card-body" style="overflow:hidden;">
+            <h5 class="card-title">{{post.title}} <br><small>by {{post.author}}</small></h5>
+            <p class="card-text">{{ post.content | truncatechars:50}}</p>
+            
+          </div>
+          <a href="{% url 'blog_app:article' post.id %}">Read More</a>
+
+          <div class="card-footer" style="border-top:none">
+            {% if post.author.id == request.user.id %}
+          <div class="d-flex flex-row justify-content-end mt-auto">
+            <a href="{% url 'blog_app:editpost' post.id %}" class="btn btn-primary d-flex justify-content-end">Edit Post <a href="{% url 'blog_app:deletepost' post.id %}" class="btn btn-danger mx-4">Delete</a></a>
+            </div> 
+          {% endif %}
+
+          {% if post.status == 0 %}
+            <p class="card-text"><small class="text-muted">Draft on {{ post.created_on }}  </small></p>
+            
+            
+            {% else %}
+            <p class="card-text"><small class="text-muted">Published on {{ post.created_on }}  </small></p>
+            
+            {% endif %}
+          </div>
+
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% extends "blog_app/base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="content-section">
+      <div class="media">
+        <legend class="border-bottom mb-4"><h4>Profile Info </h4></legend>
+        <div class="media-body">
+            <h2 class="account-heading" >Username: {{ user.username }}</h2>
+            <h3>First Name: {{ request.user.first_name }}</h3>
+            <h3>Last Name: {{ request.user.last_name }}</h3>
+            <h5>Email: {{ user.email }}</h5>
+            <img class="rounded-circle article-img" src="{{ user.userprofileinfo.profile_pic.url }}" width='240' alt={{user}}>
+        </div>
+      </div>
+      <!-- FORM HERE -->
+      <legend class="border-bottom mb-4"><h4>Edit Post</h4></legend>
+<br><br>
+
+
+    <form enctype="multipart/form-data" method="POST GET">
+    {% csrf_token %}
+        {{ form.as_p }}
+        
+        <button class="btn btn-md btn-success btn-block" type="submit">Save change</button>
+
+    </form>
+        
+  
+</div >
+
+<div class="jumbotron">
+
+    
+</div>
+
+
+{% endblock %}
+

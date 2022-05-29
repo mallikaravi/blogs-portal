@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% extends "blog_app/base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div class="login-form login ">
+    <header class=" login--header  text-center">
+        <img src="{{ user.userprofileinfo.profile_pic.url }}" width="80" height="80" class="rounded-circle">
+        <h3>Update</h3>
+        <span class="arrow-down login--header__arrow"></span>
+    </header>
+    <form action="{% url 'blog_app:editprofile'%}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name" value="{{ user.first_name }}">
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name" value="{{ user.last_name }}">
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <input type="text" name="username" id="username" class="form-control input-sm" placeholder="User Name" value="{{ user.username }}">
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password" value="{{ user.password }}">
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="input-group">
+                <input type="email" class="form-control" placeholder="E-mail" required="required" name="email" value="{{ user.email }}">
+            </div>
+        </div>
+        
+        <div class="row form-check d-flex">
+                <div class="form-group">
+                    <label class="form-check-label" style="margin-top:-2px" for="id_profile_pic">Profile Picture:</a>
+                    </label>
+                </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <input type="file" name="profile_pic" id="id_profile_pic" value="{{ user.userprofileinfo.profile_pic.url }}">
+                </div>
+            </div>
+        </div>
+       
+        <div class="form-check d-flex" style="margin-top:10px; text-align: left;">
+            <input class="form-check-input me-2" type="checkbox" />
+            <label class="form-check-label" style="margin-top:-2px">
+                I agree all statements in <a href="#!">Terms of service</a>
+            </label>
+        </div>
+        <div class="row" style="margin-top:20px;">
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <button type="submit" class="form-control btn btn-primary btn-block">Update</button>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <a href='/user_profile' class="form-control btn btn-danger btn-block">Cancel</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </form>
+</div>
+
+
+{% endblock %}
+

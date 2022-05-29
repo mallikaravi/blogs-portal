@@ -1,0 +1,9 @@
+body {
+text-align:center;
+}
+
+.card {
+        margin: 20px auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+}
